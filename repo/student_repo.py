@@ -57,7 +57,7 @@ def delete_student(student_id):
 def create_student_filtered_file(minimal_mark, subject, students):
     date = datetime.today().strftime('%Y-%m-%d')
     create_path_if_not_exist()
-    filename = "filter_for_" + subject + "_with_mark_" + str(minimal_mark) + "_for_" + str(date) + ".xlsx"
+    filename = "filter_for_" + subject + "_with_mark_above_" + str(minimal_mark) + "_for_" + str(date) + ".xlsx"
     wb = Workbook()
     ws = wb.active
     student_id = 1
