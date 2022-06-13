@@ -18,7 +18,10 @@ def load_spreadsheet_sheet(file_path, spread_sheet_name):
 
 
 def load_spreadsheet_file(file_path):
-    return openpyxl.load_workbook(file_path)
+    try:
+        return openpyxl.load_workbook(file_path)
+    except IOError:
+        print "No spreadsheet provided"
 
 
 def load_initial_students():
