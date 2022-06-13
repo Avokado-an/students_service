@@ -11,7 +11,7 @@ def filter_students_by_mark_and_subjects(min_mark, subjects):
 
 def output_student_info(student):
     print str(student.student_id) + ":" + student.name + " " + student.surname + ": " + str(student.average_mark) + \
-          "; subjects: " + str(student.specialty)
+          "; subjects: " + str(student.specialty.value)
 
 
 def retrieve_students():
