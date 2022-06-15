@@ -16,8 +16,8 @@ class Command:
 
 class AddCommandInput(Command):
     def input(self):
-        name = raw_input("name - ")
-        surname = raw_input("surname - ")
+        name = input("name - ")
+        surname = input("surname - ")
         specialty = input_specialty()
         average_mark = input_mark()
         return Student(0, name, surname, specialty, average_mark)
@@ -54,20 +54,20 @@ class FilterCommandInput(Command):
 
 
 def input_subject():
-    subject = str(raw_input("subject - "))
+    subject = str(input("subject - "))
     subjects = retrieve_all_subjects()
     while subject not in subjects:
-        print "available subjects are: " + output_set_as_string(subjects) + "\n"
-        subject = raw_input("subject - ")
+        print(f"available subjects are: {output_set_as_string(subjects)}\n")
+        subject = input("subject - ")
     return subject
 
 
 def input_specialty():
-    specialty = str(raw_input("specialty - "))
+    specialty = str(input("specialty - "))
     specialties = retrieve_all_specialties()
     while specialty not in specialties:
-        print "available specialties are: " + output_set_as_string(specialties) + "\n"
-        specialty = str(raw_input("specialty - "))
+        print(f"available specialties are: {output_set_as_string(specialties)} \n")
+        specialty = str(input("specialty - "))
     return specialty
 
 
@@ -103,18 +103,18 @@ def input_mark():
 
 
 def input_float(field_name):
-    number = raw_input(field_name + " - ")
+    number = input(f"{field_name} - ")
     while not isfloat(number):
         print("input a floating point number")
-        number = raw_input(field_name + " - ")
+        number = input(f"{field_name} - ")
     return float(number)
 
 
 def input_int(field_name):
-    number = raw_input(field_name + " - ")
+    number = input(f"{field_name} - ")
     while not isint(number):
         print("input a number")
-        number = raw_input(field_name + " - ")
+        number = input(f"{field_name} - ")
     return int(number)
 
 
