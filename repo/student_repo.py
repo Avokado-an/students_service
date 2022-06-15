@@ -21,7 +21,7 @@ def load_spreadsheet_file(file_path):
     try:
         return openpyxl.load_workbook(file_path)
     except IOError:
-        print "No spreadsheet provided"
+        print("No spreadsheet provided")
 
 
 def load_initial_students():
@@ -60,7 +60,7 @@ def delete_student(student_id):
 def create_student_filtered_file(minimal_mark, subject, students):
     date = datetime.today().strftime('%Y-%m-%d')
     create_path_if_not_exist()
-    filename = "filter_for_" + subject + "_with_mark_above_" + str(minimal_mark) + "_for_" + str(date) + ".xlsx"
+    filename = f"filter_for_{subject}_with_mark_above_{str(minimal_mark)}_for_{str(date)}.xlsx"
     wb = Workbook()
     ws = wb.active
     student_id = 1

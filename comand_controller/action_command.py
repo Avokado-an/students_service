@@ -20,7 +20,7 @@ class AddCommand(Command):
         student = Student(0, args.name, args.surname, args.specialty, args.average_mark)
         add_student(student)
         continue_functioning = True
-        print "student was added"
+        print("student was added")
         return continue_functioning
 
     def __init__(self):
@@ -31,7 +31,7 @@ class DeleteCommand(Command):
     def execute(self, args):
         remove_student(args)
         continue_functioning = True
-        print "student with id: " + str(args) + " was deleted"
+        print(f"student with id: {str(args)} was deleted")
         return continue_functioning
 
     def __init__(self):
@@ -56,8 +56,8 @@ class FilterCommand(Command):
         subject = args.subject
         filter_students_by_mark_and_subjects(average_mark, subject)
         continue_functioning = True
-        print "file with filtered students was saved for following parameters: \n" + "mark - "\
-              + str(average_mark) + ", subject - " + subject
+        print(f"file with filtered students was saved for following parameters: \n"
+              f"mark - {str(average_mark)}, subject - {subject}")
         return continue_functioning
 
     def __init__(self):
@@ -67,7 +67,7 @@ class FilterCommand(Command):
 class ExitCommand(Command):
     def execute(self, args):
         continue_functioning = False
-        print "Exit"
+        print("Exit")
         return continue_functioning
 
     def __init__(self):
