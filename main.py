@@ -5,4 +5,3 @@ if __name__ == '__main__':
     while continue_processing:
         command = input("1 - add student, 2 - delete student, 3 - see students, 4 - filter students, other - exit\n")
         continue_processing = ActionController().execute(command)
-

@@ -1,8 +1,8 @@
-from abc import ABCMeta, abstractmethod
+from abc import abstractmethod
 
 from entity.filter import StudentFilter
-from entity.specialty import Specialty
 from entity.student import Student
+from util.input_util import input_mark, input_subject, input_int, input_specialty
 
 
 class Command:
@@ -51,84 +51,3 @@ class FilterCommandInput(Command):
 
     def __init__(self):
         Command.__init__(self)
-
-
-def input_subject():
-    subject = str(input("subject - "))
-    subjects = retrieve_all_subjects()
-    while subject not in subjects:
-        print(f"available subjects are: {output_set_as_string(subjects)}\n")
-        subject = input("subject - ")
-    return subject
-
-
-def input_specialty():
-    specialty = str(input("specialty - "))
-    specialties = retrieve_all_specialties()
-    while specialty not in specialties:
-        print(f"available specialties are: {output_set_as_string(specialties)} \n")
-        specialty = str(input("specialty - "))
-    return specialty
-
-
-def output_set_as_string(values_set):
-    set_string = ""
-    for value in values_set:
-        set_string += str(value) + ", "
-    set_string = set_string[:len(set_string) - 2]
-    return set_string
-
-
-def retrieve_all_subjects():
-    subjects = []
-    for specialty in Specialty:
-        for subject in specialty.value:
-            subjects.append(subject)
-    return set(subjects)
-
-
-def retrieve_all_specialties():
-    specialties = []
-    for specialty in Specialty:
-        specialties.append(specialty.name)
-    return set(specialties)
-
-
-def input_mark():
-    mark_string = input_float("average mark")
-    if not 10. > float(mark_string) > 0.:
-        print("average mark should be positive number smaller than 10")
-        return input_mark()
-    return float(mark_string)
-
-
-def input_float(field_name):
-    number = input(f"{field_name} - ")
-    while not isfloat(number):
-        print("input a floating point number")
-        number = input(f"{field_name} - ")
-    return float(number)
-
-
-def input_int(field_name):
-    number = input(f"{field_name} - ")
-    while not isint(number):
-        print("input a number")
-        number = input(f"{field_name} - ")
-    return int(number)
-
-
-def isfloat(num):
-    try:
-        float(num)
-        return True
-    except ValueError:
-        return False
-
-
-def isint(num):
-    try:
-        int(num)
-        return True
-    except ValueError:
-        return False
