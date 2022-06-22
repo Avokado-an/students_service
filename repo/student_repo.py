@@ -1,12 +1,14 @@
 import os
 from configparser import ConfigParser
 from datetime import datetime
+from idlelib.configdialog import is_int
 
 import openpyxl
 from openpyxl import Workbook
 
 from entity.specialty import Specialty
 from entity.student import Student
+from validator.student_validator import is_valid_specialty, is_valid_mark
 
 config_file = 'config.ini'
 config_section_name = "file-config"
@@ -93,10 +95,21 @@ def create_path_if_not_exist():
 
 
 def fill_student_properties_from_spreadsheet(sheet, row):
-    student = Student(sheet.cell(row, 1).value,
-                      sheet.cell(row, 2).value,
-                      sheet.cell(row, 3).value,
-                      getattr(Specialty, sheet.cell(row, 4).value),
-                      sheet.cell(row, 5).value
+    student_id = sheet.cell(row, 1).value
+    student_name = sheet.cell(row, 2).value
+    student_surname = sheet.cell(row, 3).value
+    specialty = sheet.cell(row, 4).value
+    average_mark = sheet.cell(row, 5).value
+
+    is_valid_student_data = is_int(student_id) and is_valid_specialty(specialty) and is_valid_mark(average_mark)
+
+    if not is_valid_student_data:
+        raise ValueError(f"Invalid config file. File failed for id {student_id}")
+
+    student = Student(student_id,
+                      student_name,
+                      student_surname,
+                      getattr(Specialty, specialty),
+                      average_mark
                       )
     return student
