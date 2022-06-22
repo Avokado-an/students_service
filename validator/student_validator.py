@@ -29,6 +29,7 @@ def is_valid_specialty(specialty_name):
     specialty_exists = specialty_name in specialties
     if specialty_exists:
         return True
+    print(f"specialty {specialty_name} is invalid\n")
     display_set_with_field_name(specialties, "specialties")
     return False
 
@@ -38,6 +39,7 @@ def is_valid_subject(subject):
     subject_exists = subject in subjects
     if subject_exists:
         return True
+    print(f"subject {subject} is invalid\n")
     display_set_with_field_name(subjects, "subjects")
     return False
 
