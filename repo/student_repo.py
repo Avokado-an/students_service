@@ -1,4 +1,5 @@
 import os
+from configparser import ConfigParser
 from datetime import datetime
 
 import openpyxl
@@ -7,9 +8,14 @@ from openpyxl import Workbook
 from entity.specialty import Specialty
 from entity.student import Student
 
-students_path = "students.xlsx"
-sheet_name = "Sheet1"
-filters_path = "saved/filter/"
+config_file = 'config.ini'
+config_section_name = "file-config"
+config = ConfigParser()
+config.read(config_file)
+
+students_path = config[config_section_name]['excel-file-name']
+sheet_name = config[config_section_name]["sheet-name"]
+filters_path = config[config_section_name]["path-to-filter-results"]
 
 
 def load_spreadsheet_sheet(file_path, spread_sheet_name):
@@ -36,7 +42,7 @@ def load_initial_students():
 def add_student(created_student):
     wb = load_spreadsheet_file(students_path)
     ws = wb[sheet_name]
-    created_student.student_id = define_last_student_id() + 1
+    created_student.student_id = ws.cell(ws.max_row, 1).value + 1
     student_dict = {
         1: created_student.student_id,
         2: created_student.name,
@@ -84,15 +90,6 @@ def create_student_filtered_file(minimal_mark, subject, students):
 def create_path_if_not_exist():
     if not os.path.exists(filters_path):
         os.makedirs(filters_path)
-
-def define_last_student_id():
-    student_sheet = load_spreadsheet_sheet(students_path, sheet_name)
-    return student_sheet.cell(student_sheet.max_row, 1).value
-
-
-def define_last_row():
-    student_sheet = load_spreadsheet_sheet(students_path, sheet_name)
-    return student_sheet.max_row
 
 
 def fill_student_properties_from_spreadsheet(sheet, row):

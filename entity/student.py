@@ -5,6 +5,3 @@ class Student:
         self.surname = surname
         self.specialty = specialty
         self.average_mark = average_mark
-
-    def retrieve_specialty_subjects(self):
-        return self.specialty

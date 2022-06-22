@@ -1,4 +1,4 @@
-from abc import abstractmethod, ABCMeta
+from abc import abstractmethod
 
 from entity.student import Student
 from repo.student_repo import add_student
